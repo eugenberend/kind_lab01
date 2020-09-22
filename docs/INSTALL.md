@@ -19,6 +19,8 @@ kubectl cluster-info --context kind-kind
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
 ```
 
+> Если MacOS/Windows: применяем манифест `kubectl apply -f metrics-server/components.yaml`.
+
 4. Установка `ingress-nginx`:
 
 ```bash
@@ -34,6 +36,7 @@ kubectl get pods -n ingress-nginx -w
 6. Установка приложения
 
 ```bash
+kubectl apply -f app/namespace.yaml
 kubectl apply -f app/
 ```
 
@@ -43,7 +46,9 @@ kubectl apply -f app/
 kubectl get pod -n lab01 -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name
 ```
 
-8. Остановка и удаление кластера:
+8. Как посмотреть веб-приложение: добавить в `/etc/hosts` `127.0.0.1 hello-world.info`, перейти по этому адресу в браузере, убедиться, что работает.
+
+9. Остановка и удаление кластера:
 
 ```bash
 kind delete cluster

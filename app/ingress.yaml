@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  name: ingress
+  namespace: lab01
+spec:
+  rules:
+    - host: hello-world.info
+      http:
+        paths:
+          - backend:
+              serviceName: web
+              servicePort: 8080
+            path: /
